@@ -1,6 +1,9 @@
 package de.cie.gdi2.tree;
 
+import java.util.LinkedList;
+
 import de.cie.gdi2.aux.structures.SortedSequence;
+import de.cie.gdi2.aux.structures.Stack;
 
 public class BinarySearchTree<K extends Comparable<K>> extends
 		SortedSequence<K> {
@@ -86,8 +89,45 @@ public class BinarySearchTree<K extends Comparable<K>> extends
 	 */
 	@Override
 	public String traverse() {
-		//TODO
-		return null;
+		StackBST stack = new StackBST();
+		StringBuilder l = new StringBuilder();
+
+		// induction basis:
+		StackBSTelem elem = new StackBSTelem(0, root);
+		stack.push(elem);
+
+		// induction step:
+		BinarySearchTreeItem<K> node;
+		while (true) {
+			elem = stack.top();
+			node = elem.node;
+			if (elem.seenChildren == 0) {
+				if (node.left != null) {
+					StackBSTelem elem2 = new StackBSTelem(0, node.left);
+					stack.push(elem2);
+				} else {
+					elem.seenChildren = 1;
+					l.append(elem.node.key);
+				}
+			} else if (elem.seenChildren == 1) {
+				if (node.right != null) {
+					StackBSTelem elem2 = new StackBSTelem(0, node.right);
+					stack.push(elem2);
+				} else {
+					elem.seenChildren = 2;
+				}
+			} else if (elem.seenChildren == 2) {
+				stack.pop();
+				if (stack.isEmpty()) {
+					return l.toString();
+				}
+				elem = stack.top();
+				elem.seenChildren += 1;
+				if (elem.seenChildren == 1 && elem.node.left != null) {
+					l.append(elem.node.key);
+				}
+			}
+		}
 	}
 
 	/**
@@ -220,4 +260,44 @@ public class BinarySearchTree<K extends Comparable<K>> extends
 		}
 	}
 
+	class StackBST implements Stack<StackBSTelem> {
+
+		java.util.LinkedList<StackBSTelem> list;
+		public StackBST() {
+			this.list = new LinkedList<StackBSTelem>();
+		}
+
+		@Override
+		public void push(StackBSTelem k) {
+			this.list.addLast(k);
+		}
+
+		@Override
+		public StackBSTelem pop() {
+			return this.list.removeLast();
+		}
+
+		@Override
+		public StackBSTelem top() {
+			return this.list.getLast();
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return this.list.isEmpty();
+		}
+
+	}
+
+	class StackBSTelem {
+
+		int seenChildren;
+		BinarySearchTreeItem<K> node;
+
+		public StackBSTelem(int seenChildren, BinarySearchTreeItem<K> node) {
+			this.seenChildren = seenChildren;
+			this.node = node;
+		}
+
+	}
 }

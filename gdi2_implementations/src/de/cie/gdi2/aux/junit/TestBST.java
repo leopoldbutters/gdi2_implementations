@@ -66,13 +66,12 @@ public class TestBST {
 
 	@Test
 	public void testTraverse() {
-		bst.traverse();
+		assertEquals(bst.traverse(), "1234567");
 	}
 
-	
 	@After
 	public void printAfter() {
-//		BSTPrinter.printNode(bst);
+		// BSTPrinter.printNode(bst);
 	}
 
 }
