@@ -86,13 +86,7 @@ public class BinarySearchTree<K extends Comparable<K>> extends
 	 */
 	@Override
 	public String traverse() {
-		// StackBST<K> stack = new StackBST<K>();
-		// induction basis:
-		// StackBSTelem<K> elem = new StackBSTelem<K>(0, root);
-		// stack.push(elem);
-		// TODO
-		// induction step:
-		// stack.print();
+		//TODO
 		return null;
 	}
 
