@@ -1,4 +1,4 @@
-gdi2_implementations by cie
+GdI2 implementations by cie
 ===========================
 
 This project consists of implementations of algorthims and datastructures based on a course at TU-Darmstadt.
