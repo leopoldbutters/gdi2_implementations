@@ -1,15 +1,22 @@
 package de.cie.gdi2.tree;
 
-import java.util.LinkedList;
-
 import de.cie.gdi2.aux.structures.SortedSequence;
 import de.cie.gdi2.aux.structures.Stack;
 
 public class BinarySearchTree<K extends Comparable<K>> extends
 		SortedSequence<K> {
 
+	/********************* ATTRIBUTES *********************/
 	public BinarySearchTreeItem<K> root;
 
+	/******************************************************/
+
+	/**
+	 * Constructor
+	 * 
+	 * @param root
+	 *            gets root node as input
+	 */
 	public BinarySearchTree(BinarySearchTreeItem<K> root) {
 		this.root = root;
 	}
@@ -260,36 +267,45 @@ public class BinarySearchTree<K extends Comparable<K>> extends
 		}
 	}
 
-	class StackBST implements Stack<StackBSTelem> {
+	// /////////////////////////////////////////////////////////////////// //
+	// /////////////////////////////////////////////////////////////////// //
+	// /////////////////////////////////////////////////////////////////// //
+	// /////////////////////////////////////////////////////////////////// //
+	// /////////////////////////////////////////////////////////////////// //
 
-		java.util.LinkedList<StackBSTelem> list;
+	private class StackBST implements Stack<StackBSTelem> {
+
+		de.cie.gdi2.list.LinkedList<StackBSTelem> list;
+
 		public StackBST() {
-			this.list = new LinkedList<StackBSTelem>();
+			this.list = new de.cie.gdi2.list.LinkedList<StackBSTelem>();
 		}
 
 		@Override
 		public void push(StackBSTelem k) {
-			this.list.addLast(k);
+			this.list.insertAtTail(k);
 		}
 
 		@Override
 		public StackBSTelem pop() {
-			return this.list.removeLast();
+			StackBSTelem last = list.findAtPosition(list.number());
+			this.list.remove(last);
+			return last;
 		}
 
 		@Override
 		public StackBSTelem top() {
-			return this.list.getLast();
+			StackBSTelem last = list.findAtPosition(list.number());
+			return last;
 		}
 
 		@Override
 		public boolean isEmpty() {
-			return this.list.isEmpty();
+			return this.list.number() == 0;
 		}
-
 	}
 
-	class StackBSTelem {
+	private class StackBSTelem implements Comparable<StackBSTelem> {
 
 		int seenChildren;
 		BinarySearchTreeItem<K> node;
@@ -297,6 +313,12 @@ public class BinarySearchTree<K extends Comparable<K>> extends
 		public StackBSTelem(int seenChildren, BinarySearchTreeItem<K> node) {
 			this.seenChildren = seenChildren;
 			this.node = node;
+		}
+
+		@Override
+		public int compareTo(StackBSTelem o) {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 
 	}
