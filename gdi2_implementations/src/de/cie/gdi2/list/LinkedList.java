@@ -200,10 +200,15 @@ public class LinkedList<K extends Comparable<K>> extends LinearSequence<K> {
 	 * Auxiliary method: print
 	 */
 	public void print() {
-		LinkedListItem<K> p = first;
-		while (p != null) {
+		for (LinkedListItem<K> p = first; p != null; p = p.next)
 			System.out.print(p.key + " ");
-			p = p.next;
+	}
+
+	public void duplicate() {
+		LinkedListItem<K> q = first;
+		for (LinkedListItem<K> p = first; p != null; p = q.next) {
+			q = new LinkedListItem<K>(p.key, p.next);
+			p.next = q;
 		}
 	}
 

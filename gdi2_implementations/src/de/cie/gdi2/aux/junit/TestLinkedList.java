@@ -56,4 +56,11 @@ public class TestLinkedList {
 		assertEquals(list.number(), 5);
 	}
 
+	@Test(timeout = 1000)
+	public void testDuplicate() {
+		assertEquals(list.number(), 4);
+		list.duplicate();
+		assertEquals(list.number(), 8);
+	}
+
 }
