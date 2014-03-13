@@ -2,7 +2,7 @@ package de.cie.gdi2.map;
 
 import java.util.Comparator;
 
-import de.cie.gdi2.aux.BoundedMap;
+import de.cie.gdi2.aux.structures.BoundedMap;
 
 public class HashMap<K, V> implements BoundedMap<K, V> {
 

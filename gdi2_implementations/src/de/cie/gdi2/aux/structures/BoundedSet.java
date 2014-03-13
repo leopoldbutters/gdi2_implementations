@@ -1,4 +1,4 @@
-package de.cie.gdi2.aux;
+package de.cie.gdi2.aux.structures;
 
 public interface BoundedSet<K> {
 	

@@ -1,6 +1,6 @@
 package de.cie.gdi2.map;
 
-import de.cie.gdi2.aux.BoundedSet;
+import de.cie.gdi2.aux.structures.BoundedSet;
 
 public class HashSet<K> implements BoundedSet<K> {
 
